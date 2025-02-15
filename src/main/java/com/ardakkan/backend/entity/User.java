@@ -16,6 +16,10 @@ import jakarta.persistence.JoinColumn;
 
 
 
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Entity
 @Table(name = "User")
 public class User {
@@ -40,55 +44,101 @@ public class User {
     @Column(nullable = false, length = 20)
     private UserRoles role;
 
-	public Long getId() {
-		return id;
-	}
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime registrationDate = LocalDateTime.now(); // Kullanıcı kaydolduğunda otomatik atanır
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Column(nullable = false)
+    private boolean isActive = true; // Kullanıcının aktif olup olmadığını belirler
 
-	public String getFirstName() {
-		return firstName;
-	}
+    @Column(length = 255)
+    private String profilePictureUrl; // Kullanıcının profil resmi için URL
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public UserRoles getRole() {
-		return role;
-	}
-
-	public void setRole(UserRoles role) {
-		this.role = role;
-	}
     
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "user_favorites",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private List<Course> favoriteCourses; // Kullanıcının favori kursları
+
+    // Getter & Setter Methods
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public UserRoles getRole() {
+        return role;
+    }
+
+    public void setRole(UserRoles role) {
+        this.role = role;
+    }
+
+    public LocalDateTime getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public String getProfilePictureUrl() {
+        return profilePictureUrl;
+    }
+
+    public void setProfilePictureUrl(String profilePictureUrl) {
+        this.profilePictureUrl = profilePictureUrl;
+    }
+
     
-    
+
+    public List<Course> getFavoriteCourses() {
+        return favoriteCourses;
+    }
+
+    public void setFavoriteCourses(List<Course> favoriteCourses) {
+        this.favoriteCourses = favoriteCourses;
+    }
 }
-

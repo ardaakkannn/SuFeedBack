@@ -158,37 +158,6 @@ public class AuthController {
 
 
 
-    // Yeni kullanıcı kaydı
-    @PostMapping("/register")
-    public ResponseEntity<Map<String, Object>> register(@RequestBody RegisterRequest registerRequest) {
-        try {
-            // Yeni kullanıcı kaydı yapıyoruz
-            userService.registerUser(registerRequest);
-
-            // Kayıttan sonra otomatik olarak giriş yap ve token oluştur
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(registerRequest.getEmail(), registerRequest.getPassword()));
-
-            String role = authentication.getAuthorities().iterator().next().getAuthority();
-            String token = tokenService.generateToken(registerRequest.getEmail(), role);
-            
-            
-            // Yeni kayıt olan kullanıcının bilgilerini alıyoruz
-            User user = userService.findByEmail(registerRequest.getEmail());
-
-            // Yanıt olarak token, isim ve soyisim gönderiyoruz
-            Map<String, Object> response = new HashMap<>();
-            response.put("token", token);
-            response.put("firstName", user.getFirstName());
-            response.put("lastName", user.getLastName());
-            response.put("userId", user.getId());
-
-            return ResponseEntity.status(HttpStatus.CREATED).body(response);
-            
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", "Kayıt başarısız: " + e.getMessage()));
-        }
-    }
     
     @GetMapping("/login")
     public ResponseEntity<String> getLoginPage() {

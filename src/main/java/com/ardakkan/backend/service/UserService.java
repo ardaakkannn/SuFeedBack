@@ -3,9 +3,10 @@ package com.ardakkan.backend.service;
 
 import com.ardakkan.backend.dto.RegisterRequest;
 import com.ardakkan.backend.dto.UserDTO;
+import com.ardakkan.backend.entity.Course;
 import com.ardakkan.backend.entity.User;
 import com.ardakkan.backend.entity.UserRoles;
-
+import com.ardakkan.backend.repo.CourseRepository;
 import com.ardakkan.backend.repo.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,18 @@ public class UserService {
     private final UserRepository userRepository;
     
     private final PasswordEncoder passwordEncoder;
+    
+    
+    private final CourseRepository courseRepository;
 
     private final MailService mailService;
     @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, MailService mailService) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, MailService mailService
+    		, CourseRepository courseRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.mailService= mailService;
+        this.courseRepository=courseRepository;
        
     }
     
@@ -153,6 +159,31 @@ public class UserService {
   
         return user;
     }
+    
+ // Favori kurs ekleme
+    public void addFavoriteCourse(Long userId, Long courseId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        Course course = courseRepository.findById(courseId).orElseThrow(() -> new RuntimeException("Course not found"));
+
+        user.getFavoriteCourses().add(course);
+        userRepository.save(user);
+    }
+
+    // Favori kurstan çıkarma
+    public void removeFavoriteCourse(Long userId, Long courseId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        Course course = courseRepository.findById(courseId).orElseThrow(() -> new RuntimeException("Course not found"));
+
+        user.getFavoriteCourses().remove(course);
+        userRepository.save(user);
+    }
+
+    // Kullanıcının favori kurslarını listeleme
+    public List<Course> getFavoriteCourses(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        return user.getFavoriteCourses();
+    }
+    
     
     
     
