@@ -7,6 +7,10 @@ import {
   UserOutlined,
   SearchOutlined,
   HeartOutlined,
+  StarOutlined,
+  FileTextOutlined,
+  EyeOutlined,
+  CheckCircleOutlined
 } from "@ant-design/icons";
 import mockData from "../mockData";
 import logo from "../assets/sufeedback.png";
@@ -140,28 +144,52 @@ const Main = () => {
         <Layout style={{ padding: "24px" }}>
           <Content style={{ backgroundColor: "#fff", padding: "24px", borderRadius: "8px" }}>
             {/* Feature Cards */}
-            <Row gutter={[16, 16]}>
+            <Row gutter={[16, 16]} justify="center">
               <Col span={6}>
-                <Card bordered hoverable onClick={() => navigate("/rate-review")}>
-                  <Title level={5}>RATE & REVIEW COURSES</Title>
+                <Card
+                  bordered
+                  hoverable
+                  onClick={() => navigate("/rate-review")}
+                  style={{ textAlign: "center", backgroundColor: "#E3F2FD", borderRadius: "10px", padding: "20px" }}
+                >
+                  <StarOutlined style={{ fontSize: "32px", color: "#007BFF" }} />
+                  <Title level={5} style={{ marginTop: "10px" }}>RATE & REVIEW COURSES</Title>
                   <Paragraph>“Share your feedback and help others make informed choices.”</Paragraph>
                 </Card>
               </Col>
               <Col span={6}>
-                <Card bordered hoverable onClick={() => navigate("/explore-syllabus")}>
-                  <Title level={5}>EXPLORE SYLLABUS LINKS</Title>
+                <Card
+                  bordered
+                  hoverable
+                  onClick={() => navigate("/explore-syllabus")}
+                  style={{ textAlign: "center", backgroundColor: "#E8F5E9", borderRadius: "10px", padding: "20px" }}
+                >
+                  <FileTextOutlined style={{ fontSize: "32px", color: "#388E3C" }} />
+                  <Title level={5} style={{ marginTop: "10px" }}>EXPLORE SYLLABUS LINKS</Title>
                   <Paragraph>“Access official course syllabus links directly from BannerWeb.”</Paragraph>
                 </Card>
               </Col>
               <Col span={6}>
-                <Card bordered hoverable>
-                  <Title level={5}>VIEW RATINGS & FEEDBACK</Title>
+                <Card
+                  bordered
+                  hoverable
+                  onClick={() => navigate("/view-feedback")}
+                  style={{ textAlign: "center", backgroundColor: "#FFF3E0", borderRadius: "10px", padding: "20px" }}
+                >
+                  <EyeOutlined style={{ fontSize: "32px", color: "#F57C00" }} />
+                  <Title level={5} style={{ marginTop: "10px" }}>VIEW RATINGS & FEEDBACK</Title>
                   <Paragraph>“Browse professor ratings, workload insights, and student reviews.”</Paragraph>
                 </Card>
               </Col>
               <Col span={6}>
-                <Card bordered hoverable>
-                  <Title level={5}>SENTIMENT-PROTECTED REVIEWS</Title>
+                <Card  //cards changed
+                  bordered
+                  hoverable
+                  onClick={() => navigate("/sentiment-reviews")}
+                  style={{ textAlign: "center", backgroundColor: "#F3E5F5", borderRadius: "10px", padding: "20px" }}
+                >
+                  <CheckCircleOutlined style={{ fontSize: "32px", color: "#8E24AA" }} />
+                  <Title level={5} style={{ marginTop: "10px" }}>SENTIMENT-PROTECTED REVIEWS</Title>
                   <Paragraph>“Ensure respectful and constructive feedback with AI moderation.”</Paragraph>
                 </Card>
               </Col>
