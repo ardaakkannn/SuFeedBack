@@ -13,8 +13,8 @@ const DepartmentPage = () => {
   const navigate = useNavigate();
 
   // Filter courses belonging to the selected department
-  const departmentCourses = mockData.filter((course) =>
-    course.department.toLowerCase() === departmentName.toLowerCase()
+  const departmentCourses = mockData.filter(
+    (course) => course.department.toLowerCase() === departmentName.toLowerCase()
   );
 
   return (
@@ -24,22 +24,39 @@ const DepartmentPage = () => {
         <Row gutter={[16, 16]}>
           {departmentCourses.map((course) => (
             <Col xs={24} sm={12} md={8} lg={6} key={course.course}>
-              <Card
-                hoverable
-                cover={<img alt={course.course} src={course.image} />}
+              <div
                 onClick={() => navigate(`/course/${course.course}`)}
+                style={{ cursor: "pointer" }}
               >
-                <Meta
-                  avatar={<Avatar src={course.instructorAvatar} />}
-                  title={course.course}
-                  description={`Instructor: ${course.instructor}`}
-                />
-                <div style={{ marginTop: "10px" }}>
-                  {course.tags.map((tag) => (
-                    <Tag key={tag}>{tag}</Tag>
-                  ))}
-                </div>
-              </Card>
+                <Card
+                  hoverable
+                  cover={
+                    <img
+                      alt={course.course}
+                      src={course.image}
+                      style={{ height: "150px", objectFit: "cover" }}
+                    />
+                  }
+                  style={{ borderRadius: "8px", overflow: "hidden" }}
+                >
+                  <Meta
+                    avatar={
+                      <Avatar src={course.instructorAvatar}>
+                        {course.instructor[0]}
+                      </Avatar>
+                    }
+                    title={course.course}
+                    description={`Instructor: ${course.instructor}`}
+                  />
+                  <div style={{ marginTop: "10px" }}>
+                    {course.tags.map((tag) => (
+                      <Tag key={tag} color="blue">
+                        {tag}
+                      </Tag>
+                    ))}
+                  </div>
+                </Card>
+              </div>
             </Col>
           ))}
         </Row>
