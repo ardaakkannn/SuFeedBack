@@ -10,7 +10,16 @@ import {
   StarOutlined,
   FileTextOutlined,
   EyeOutlined,
-  CheckCircleOutlined
+  CheckCircleOutlined,
+  LaptopOutlined,
+  ThunderboltOutlined,
+  SettingOutlined,
+  ExperimentOutlined,
+  DollarOutlined,
+  GlobalOutlined,
+  ReadOutlined,
+  WomanOutlined,
+  SmileOutlined
 } from "@ant-design/icons";
 import mockData from "../mockData";
 import logo from "../assets/sufeedback.png";
@@ -24,17 +33,18 @@ const Main = () => {
 
   // Define department keys explicitly
   const departments = [
-    { key: "CS", name: "Computer Science" },
-    { key: "EE", name: "Electrical Engineering" },
-    { key: "IE", name: "Industrial Engineering" },
-    { key: "ME", name: "Mechanical Engineering" },
-    { key: "NANO", name: "Nanoengineering" },
-    { key: "ECON", name: "Economics" },
-    { key: "PS", name: "Political Science" },
-    { key: "CULT", name: "Cultural Studies" },
-    { key: "GRS", name: "Gender Studies" },
-    { key: "PSY", name: "Psychology" },
+    { key: "CS", name: "Computer Science", icon: <LaptopOutlined /> },
+    { key: "EE", name: "Electrical Engineering", icon: <ThunderboltOutlined /> },
+    { key: "IE", name: "Industrial Engineering", icon: <SettingOutlined /> },
+    { key: "ME", name: "Mechanical Engineering", icon: <ExperimentOutlined /> },
+    { key: "NANO", name: "Nanoengineering", icon: <ExperimentOutlined /> },
+    { key: "ECON", name: "Economics", icon: <DollarOutlined /> },
+    { key: "PS", name: "Political Science", icon: <GlobalOutlined /> },
+    { key: "CULT", name: "Cultural Studies", icon: <ReadOutlined /> },
+    { key: "GRS", name: "Gender Studies", icon: <WomanOutlined /> },
+    { key: "PSY", name: "Psychology", icon: <SmileOutlined /> },
   ];
+  
 
   // Filter only courses that have reviews
   const reviewedCourses = mockData.filter((course) => course.reviews && course.reviews.length > 0);
@@ -121,7 +131,7 @@ const Main = () => {
               {departments
                 .filter((dept) => ["CS", "EE", "IE", "ME", "NANO"].includes(dept.key))
                 .map((dept) => (
-                  <Menu.Item key={dept.key} onClick={() => navigate(`/department/${dept.key}`)}>
+                  <Menu.Item key={dept.key} icon={dept.icon} onClick={() => navigate(`/department/${dept.key}`)}>
                     {dept.name}
                   </Menu.Item>
                 ))}
@@ -132,7 +142,7 @@ const Main = () => {
               {departments
                 .filter((dept) => ["ECON", "PS", "CULT", "GRS", "PSY"].includes(dept.key))
                 .map((dept) => (
-                  <Menu.Item key={dept.key} onClick={() => navigate(`/department/${dept.key}`)}>
+                  <Menu.Item key={dept.key} icon={dept.icon} onClick={() => navigate(`/department/${dept.key}`)}>
                     {dept.name}
                   </Menu.Item>
                 ))}
