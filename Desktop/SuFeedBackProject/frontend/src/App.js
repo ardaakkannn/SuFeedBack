@@ -25,7 +25,7 @@ const App = () => {
         <Route path="/explore-syllabus" element={<ExploreSyllabusPage />} />
         <Route path="/department/:departmentName" element={<DepartmentPage />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/common-core" element={<CommonCore />} />
+        <Route path="/common-core" element={<CommonCore />} />   {/*new*/}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
