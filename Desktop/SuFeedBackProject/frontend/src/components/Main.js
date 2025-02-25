@@ -119,8 +119,8 @@ const Main = () => {
           </AutoComplete>
 
           <Menu mode="inline" style={{ borderRight: 0, fontWeight: "500" }}>
-            <Menu.Item key="1" icon={<BookOutlined />} onClick={() => navigate("/common-core")}>
-              Common Core Courses
+            <Menu.Item key="1" icon={<BookOutlined />} onClick={() => navigate("/common-core")}>  {/* newly added*/}
+              Common Core Courses 
             </Menu.Item>
             <Menu.Item key="2" icon={<HeartOutlined />} onClick={() => navigate("/favourites")}>
               Favourites
