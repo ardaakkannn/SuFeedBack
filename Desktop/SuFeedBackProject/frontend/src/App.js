@@ -8,6 +8,7 @@ import RateReviewPage from "./components/RateReviewPage";
 import ExploreSyllabusPage from "./components/ExploreSyllabusPage";
 import DepartmentPage from "./components/DepartmentPage";
 import AboutPage from "./components/AboutPage";
+import CommonCore from './components/CommonCore';
 
 
 const NotFound = () => <h2>Page Not Found</h2>;
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/explore-syllabus" element={<ExploreSyllabusPage />} />
         <Route path="/department/:departmentName" element={<DepartmentPage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/common-core" element={<CommonCore />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
